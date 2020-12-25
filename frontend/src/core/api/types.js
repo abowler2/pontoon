@@ -138,4 +138,5 @@ export type MachineryTranslation = {|
     original: string,
     translation: string,
     quality?: number,
+    projectName?: string,
 |};

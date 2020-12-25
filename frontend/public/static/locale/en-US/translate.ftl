@@ -425,7 +425,7 @@ interactivetour-InteractiveTour--end-footer =
 ## Machinery
 ## Shows a list of translations from machines.
 machinery-Machinery--search-placeholder =
-    .placeholder = Search in Machinery
+    .placeholder = Search Translation Memory
 
 
 ## Machinery Caighdean Translation
@@ -470,7 +470,7 @@ machinery-Translation--copy =
 ## Shows the translation source from Pontoon's memory.
 machinery-TranslationMemory--pontoon-homepage =
     .title = Pontoon Homepage
-machinery-TranslationMemory--translation-memory = TRANSLATION MEMORY
+machinery-TranslationMemory--translation-memory = { $projectName }
 machinery-TranslationMemory--number-occurrences =
     .title = Number of translation occurrences
 

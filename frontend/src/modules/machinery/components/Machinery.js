@@ -90,7 +90,7 @@ export default class Machinery extends React.Component<Props> {
                                 id='machinery-search'
                                 type='search'
                                 autoComplete='off'
-                                placeholder='Search in Machinery'
+                                placeholder='Search Translation Memory'
                                 ref={this.searchInput}
                             />
                         </Localized>
