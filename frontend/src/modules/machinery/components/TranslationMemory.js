@@ -5,17 +5,12 @@ import { Localized } from '@fluent/react';
 
 type Props = {|
     itemCount?: number,
-    projectName?: string,
 |};
 
 /**
  * Show the translation source from Pontoon's memory.
  */
 export default function TranslationMemory(props: Props) {
-    const projectName = props.projectName
-        ? props.projectName.toUpperCase()
-        : 'Translation Memory';
-
     return (
         <li>
             <Localized
@@ -30,11 +25,8 @@ export default function TranslationMemory(props: Props) {
                     rel='noopener noreferrer'
                     onClick={(e: SyntheticMouseEvent<>) => e.stopPropagation()}
                 >
-                    <Localized
-                        id='machinery-TranslationMemory--translation-memory'
-                        vars={{ projectName: projectName }}
-                    >
-                        <span>{'{ $projectName }'}</span>
+                    <Localized id='machinery-TranslationMemory--translation-memory'>
+                        <span>TRANSLATION MEMORY</span>
                     </Localized>
                     {!props.itemCount ? null : (
                         <Localized

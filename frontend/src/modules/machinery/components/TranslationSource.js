@@ -28,7 +28,6 @@ export default function TranslationSource({ translation, locale }: Props) {
                 return (
                     <TranslationMemory
                         itemCount={translation.itemCount}
-                        projectName={translation.projectName}
                         key={index}
                     />
                 );

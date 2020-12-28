@@ -470,7 +470,7 @@ machinery-Translation--copy =
 ## Shows the translation source from Pontoon's memory.
 machinery-TranslationMemory--pontoon-homepage =
     .title = Pontoon Homepage
-machinery-TranslationMemory--translation-memory = { $projectName }
+machinery-TranslationMemory--translation-memory = TRANSLATION MEMORY
 machinery-TranslationMemory--number-occurrences =
     .title = Number of translation occurrences
 

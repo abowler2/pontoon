@@ -28,7 +28,7 @@ export default class MachineryAPI extends APIBase {
         locale: Locale,
         pk: ?number,
     ): Promise<Translations> {
-        const url = '/concordance-search/';
+        const url = '/translation-memory/';
         const params = {
             text: source,
             locale: locale.code,
@@ -47,8 +47,7 @@ export default class MachineryAPI extends APIBase {
                 itemCount: item.count,
                 original: item.source,
                 translation: item.target,
-                quality: item.quality,
-                projectName: item.project_name,
+                quality: Math.round(item.quality),
             };
         });
     }
