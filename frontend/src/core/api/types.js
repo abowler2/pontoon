@@ -124,6 +124,7 @@ export type OtherLocaleTranslation = {|
  * Translation Memory... ).
  */
 export type SourceType =
+    | 'concordance-search'
     | 'translation-memory'
     | 'google-translate'
     | 'microsoft-translator'

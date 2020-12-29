@@ -5,6 +5,7 @@ import { Localized } from '@fluent/react';
 
 type Props = {|
     itemCount?: number,
+    projectName?: string,
 |};
 
 /**
@@ -25,9 +26,13 @@ export default function TranslationMemory(props: Props) {
                     rel='noopener noreferrer'
                     onClick={(e: SyntheticMouseEvent<>) => e.stopPropagation()}
                 >
-                    <Localized id='machinery-TranslationMemory--translation-memory'>
-                        <span>TRANSLATION MEMORY</span>
-                    </Localized>
+                    {!props.projectName ? (
+                        <Localized id='machinery-TranslationMemory--translation-memory'>
+                            <span>TRANSLATION MEMORY</span>
+                        </Localized>
+                    ) : (
+                        <span>{props.projectName.toUpperCase()}</span>
+                    )}
                     {!props.itemCount ? null : (
                         <Localized
                             id='machinery-TranslationMemory--number-occurrences'

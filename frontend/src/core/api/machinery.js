@@ -21,6 +21,36 @@ export default class MachineryAPI extends APIBase {
     }
 
     /**
+     * Return results from Concordance search.
+     */
+
+    async getConcordanceResults(
+        source: string,
+        locale: Locale,
+    ): Promise<Translations> {
+        const url = '/concordance-search/';
+        const params = {
+            text: source,
+            locale: locale.code,
+        };
+
+        const results = await this._get(url, params);
+
+        if (!Array.isArray(results)) {
+            return [];
+        }
+
+        return results.map((item): MachineryTranslation => {
+            return {
+                sources: ['concordance-search'],
+                original: item.source,
+                translation: item.target,
+                projectName: item.project_name,
+            };
+        });
+    }
+
+    /**
      * Return translations from Pontoon's memory.
      */
     async getTranslationMemory(

@@ -59,9 +59,15 @@ export function get(source: string, locale: Locale, pk: ?number): Function {
         // Abort all previously running requests.
         await api.machinery.abort();
 
-        api.machinery
-            .getTranslationMemory(source, locale, pk)
-            .then((results) => dispatch(addTranslations(results)));
+        if (!pk) {
+            api.machinery
+                .getConcordanceResults(source, locale)
+                .then((results) => dispatch(addTranslations(results)));
+        } else {
+            api.machinery
+                .getTranslationMemory(source, locale, pk)
+                .then((results) => dispatch(addTranslations(results)));
+        }
 
         api.machinery
             .getGoogleTranslation(source, locale)

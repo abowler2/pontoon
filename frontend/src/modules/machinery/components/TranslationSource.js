@@ -24,6 +24,13 @@ type Props = {|
 export default function TranslationSource({ translation, locale }: Props) {
     const translationSource = translation.sources.map((source, index) => {
         switch (source) {
+            case 'concordance-search':
+                return (
+                    <TranslationMemory
+                        projectName={translation.projectName}
+                        key={index}
+                    />
+                );
             case 'translation-memory':
                 return (
                     <TranslationMemory
