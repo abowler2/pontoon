@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Localized } from '@fluent/react';
 
+import './ConcordanceSearch.css';
 import './Translation.css';
 
 import * as editor from 'core/editor';

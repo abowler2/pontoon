@@ -190,7 +190,6 @@ export default class MachineryAPI extends APIBase {
                 sources: ['microsoft-terminology'],
                 original: item.source,
                 translation: item.target,
-                quality: Math.round(item.quality),
             };
         });
     }

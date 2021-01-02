@@ -50,6 +50,9 @@ function dedupedTranslations(
     });
 
     return translations.sort((a, b) => {
+        if (!a.quality && !b.quality) {
+            return 1;
+        }
         if (!a.quality && b.quality) {
             return 1;
         }
