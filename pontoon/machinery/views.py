@@ -357,9 +357,6 @@ def microsoft_terminology(request):
                     {
                         "source": translation.find(xpath + "OriginalText").text,
                         "target": translation.find(xpath + "TranslatedText").text,
-                        "quality": int(
-                            translation.find(xpath + "ConfidenceLevel").text
-                        ),
                     }
                 )
 

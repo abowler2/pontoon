@@ -425,7 +425,7 @@ interactivetour-InteractiveTour--end-footer =
 ## Machinery
 ## Shows a list of translations from machines.
 machinery-Machinery--search-placeholder =
-    .placeholder = Search Translation Memory
+    .placeholder = Concordance Search
 
 
 ## Machinery Caighdean Translation
