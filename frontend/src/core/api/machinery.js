@@ -36,16 +36,18 @@ export default class MachineryAPI extends APIBase {
 
         const results = await this._get(url, params);
 
-        if (!Array.isArray(results)) {
+        if (!results.results || !Array.isArray(results.results)) {
             return [];
         }
 
-        return results.map((item): MachineryTranslation => {
+        return results.results.map((item): MachineryTranslation => {
             return {
                 sources: ['concordance-search'],
                 original: item.source,
                 translation: item.target,
                 projectName: item.project_name,
+                projectSlug: item.project_slug,
+                entityPK: item.entity_pk,
             };
         });
     }
