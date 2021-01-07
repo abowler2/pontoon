@@ -28,6 +28,9 @@ export default function TranslationSource({ translation, locale }: Props) {
                 return (
                     <TranslationMemory
                         projectName={translation.projectName}
+                        projectSlug={translation.projectSlug}
+                        entityPK={translation.entityPK}
+                        localeCode={locale.code}
                         key={index}
                     />
                 );
