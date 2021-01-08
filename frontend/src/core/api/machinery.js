@@ -46,8 +46,6 @@ export default class MachineryAPI extends APIBase {
                 original: item.source,
                 translation: item.target,
                 projectName: item.project_name,
-                projectSlug: item.project_slug,
-                entityPK: item.entity_pk,
             };
         });
     }
