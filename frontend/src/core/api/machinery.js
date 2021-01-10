@@ -6,6 +6,10 @@ import type { Locale } from 'core/locale';
 import type { MachineryTranslation } from './types';
 
 type Translations = Array<MachineryTranslation>;
+type ConcordanceTranslations = {|
+    results: Array<MachineryTranslation>,
+    hasMore: boolean,
+|};
 
 export default class MachineryAPI extends APIBase {
     async _get(url: string, params: Object) {
@@ -27,7 +31,7 @@ export default class MachineryAPI extends APIBase {
     async getConcordanceResults(
         source: string,
         locale: Locale,
-    ): Promise<Translations> {
+    ): Promise<ConcordanceTranslations> {
         const url = '/concordance-search/';
         const params = {
             text: source,
@@ -37,17 +41,21 @@ export default class MachineryAPI extends APIBase {
         const results = await this._get(url, params);
 
         if (!results.results || !Array.isArray(results.results)) {
-            return [];
+            return { results: [], hasMore: false };
         }
 
-        return results.results.map((item): MachineryTranslation => {
-            return {
-                sources: ['concordance-search'],
-                original: item.source,
-                translation: item.target,
-                projectName: item.project_name,
-            };
-        });
+        const searchResults = results.results.map(
+            (item): MachineryTranslation => {
+                return {
+                    sources: ['concordance-search'],
+                    original: item.source,
+                    translation: item.target,
+                    projectName: item.project_name,
+                };
+            },
+        );
+
+        return { results: searchResults, hasMore: results.has_next };
     }
 
     /**

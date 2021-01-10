@@ -15,13 +15,16 @@ export const RESET: 'machinery/RESET' = 'machinery/RESET';
 export type AddTranslationsAction = {
     +type: typeof ADD_TRANSLATIONS,
     +translations: Array<MachineryTranslation>,
+    +hasMore?: boolean,
 };
 export function addTranslations(
     translations: Array<MachineryTranslation>,
+    hasMore?: boolean,
 ): AddTranslationsAction {
     return {
         type: ADD_TRANSLATIONS,
         translations: translations,
+        hasMore,
     };
 }
 
@@ -62,7 +65,9 @@ export function get(source: string, locale: Locale, pk: ?number): Function {
         if (!pk) {
             api.machinery
                 .getConcordanceResults(source, locale)
-                .then((results) => dispatch(addTranslations(results)));
+                .then((results) =>
+                    dispatch(addTranslations(results.results, results.hasMore)),
+                );
         } else {
             api.machinery
                 .getTranslationMemory(source, locale, pk)

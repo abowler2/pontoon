@@ -344,7 +344,7 @@ export class EntitiesListBase extends React.Component<InternalProps> {
                     loader={
                         <SkeletonLoader
                             key={0}
-                            entities={props.entities.entities}
+                            items={props.entities.entities}
                         />
                     }
                     useWindow={false}

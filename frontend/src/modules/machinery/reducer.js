@@ -13,6 +13,7 @@ export type MachineryState = {|
     entity: ?number,
     sourceString: string,
     translations: Translations,
+    hasMore?: boolean,
 |};
 
 /**
@@ -75,6 +76,7 @@ const initial: MachineryState = {
     entity: null,
     sourceString: '',
     translations: [],
+    hasMore: false,
 };
 
 export default function reducer(
@@ -89,6 +91,7 @@ export default function reducer(
                     state.translations,
                     action.translations,
                 ),
+                hasMore: action.hasMore,
             };
         case RESET:
             return {

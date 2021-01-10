@@ -1,11 +1,13 @@
 /* @flow */
 
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import { Localized } from '@fluent/react';
 
 import './Machinery.css';
 
 import Translation from './Translation';
+import { SkeletonLoader } from 'core/loaders';
 
 import type { Locale } from 'core/locale';
 import type { MachineryState } from '..';
@@ -59,6 +61,10 @@ export default class Machinery extends React.Component<Props> {
         this.props.searchMachinery(this.searchInput.current.value);
     };
 
+    getMoreResults = () => {
+        console.log('****** More Results ******');
+    };
+
     render() {
         const { locale, machinery } = this.props;
 
@@ -67,6 +73,7 @@ export default class Machinery extends React.Component<Props> {
         }
 
         const showResetButton = !machinery.entity && machinery.sourceString;
+        const hasMore = machinery.hasMore;
 
         return (
             <section className='machinery'>
@@ -96,6 +103,7 @@ export default class Machinery extends React.Component<Props> {
                         </Localized>
                     </form>
                 </div>
+<<<<<<< HEAD
                 <ul>
                     {machinery.translations.map((translation, index) => {
                         return (
@@ -108,6 +116,42 @@ export default class Machinery extends React.Component<Props> {
                         );
                     })}
                 </ul>
+=======
+                <InfiniteScroll
+                    pageStart={1}
+                    loadMore={this.getMoreResults}
+                    hasMore={hasMore}
+                    loader={
+                        <SkeletonLoader
+                            key={0}
+                            items={machinery.translations}
+                        />
+                    }
+                    useWindow={false}
+                >
+                    <ul>
+                        {machinery.translations.map((translation, index) => {
+                            return (
+                                <Translation
+                                    sourceString={machinery.sourceString}
+                                    translation={translation}
+                                    entity={machinery.entity}
+                                    addTextToEditorTranslation={
+                                        addTextToEditorTranslation
+                                    }
+                                    updateEditorTranslation={
+                                        updateEditorTranslation
+                                    }
+                                    updateMachinerySources={
+                                        updateMachinerySources
+                                    }
+                                    key={index}
+                                />
+                            );
+                        })}
+                    </ul>
+                </InfiniteScroll>
+>>>>>>> Initial work to add infinite scroll to machinery search
             </section>
         );
     }
