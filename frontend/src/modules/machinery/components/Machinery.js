@@ -62,7 +62,17 @@ export default class Machinery extends React.Component<Props> {
     };
 
     getMoreResults = () => {
-        console.log('****** More Results ******');
+        const { machinery } = this.props;
+
+        // Temporary fix for the infinite number of requests from InfiniteScroller
+        // More info at:
+        // * https://github.com/CassetteRocks/react-infinite-scroller/issues/149
+        // * https://github.com/CassetteRocks/react-infinite-scroller/issues/163
+        // if (machinery.fetching) {
+        //     return;
+        // }
+
+        this.props.searchMachinery(this.searchInput.current.value);
     };
 
     render() {
@@ -128,6 +138,7 @@ export default class Machinery extends React.Component<Props> {
                         />
                     }
                     useWindow={false}
+                    threshold={600}
                 >
                     <ul>
                         {machinery.translations.map((translation, index) => {

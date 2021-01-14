@@ -1,11 +1,15 @@
 /* @flow */
 
-import { ADD_TRANSLATIONS, RESET } from './actions';
+import { ADD_TRANSLATIONS, /*REQUEST,*/ RESET } from './actions';
 
 import type { MachineryTranslation } from 'core/api';
-import type { AddTranslationsAction, ResetAction } from './actions';
+import type {
+    AddTranslationsAction,
+    // RequestAction,
+    ResetAction,
+} from './actions';
 
-type Action = AddTranslationsAction | ResetAction;
+type Action = AddTranslationsAction | /* RequestAction |*/ ResetAction;
 
 type Translations = Array<MachineryTranslation>;
 
@@ -13,6 +17,7 @@ export type MachineryState = {|
     entity: ?number,
     sourceString: string,
     translations: Translations,
+    // fetching: boolean,
     hasMore?: boolean,
 |};
 
@@ -76,6 +81,7 @@ const initial: MachineryState = {
     entity: null,
     sourceString: '',
     translations: [],
+    // fetching: false,
     hasMore: false,
 };
 
@@ -91,8 +97,15 @@ export default function reducer(
                     state.translations,
                     action.translations,
                 ),
+                // fetching: false,
                 hasMore: action.hasMore,
             };
+        // case REQUEST:
+        //     return {
+        //         ...state,
+        //         fetching: true,
+        //         hasMore: false,
+        //     };
         case RESET:
             return {
                 ...state,
