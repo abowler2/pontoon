@@ -7,20 +7,20 @@ import type { Locale } from 'core/locale';
 
 export const ADD_TRANSLATIONS: 'machinery/ADD_TRANSLATIONS' =
     'machinery/ADD_TRANSLATIONS';
-// export const REQUEST: 'entities/REQUEST' = 'entities/REQUEST';
+export const REQUEST: 'machinery/REQUEST' = 'machinery/REQUEST';
 export const RESET: 'machinery/RESET' = 'machinery/RESET';
 
 /**
  * Indicate that entities are currently being fetched.
  */
-// export type RequestAction = {
-//     type: typeof REQUEST,
-// };
-// export function request(): RequestAction {
-//     return {
-//         type: REQUEST,
-//     };
-// }
+export type RequestAction = {
+    type: typeof REQUEST,
+};
+export function request(): RequestAction {
+    return {
+        type: REQUEST,
+    };
+}
 
 /**
  * Add a list of machine translations to the current list.
@@ -70,8 +70,8 @@ export function reset(entity: ?number, sourceString: string): ResetAction {
  */
 export function get(source: string, locale: Locale, pk: ?number): Function {
     return async (dispatch) => {
-        // dispatch(request());
-        // dispatch(reset(pk, source));
+        dispatch(reset(pk, source));
+        dispatch(request());
 
         // Abort all previously running requests.
         await api.machinery.abort();

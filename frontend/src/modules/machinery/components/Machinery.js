@@ -68,9 +68,9 @@ export default class Machinery extends React.Component<Props> {
         // More info at:
         // * https://github.com/CassetteRocks/react-infinite-scroller/issues/149
         // * https://github.com/CassetteRocks/react-infinite-scroller/issues/163
-        // if (machinery.fetching) {
-        //     return;
-        // }
+        if (machinery.fetching) {
+            return;
+        }
 
         this.props.searchMachinery(this.searchInput.current.value);
     };
@@ -83,6 +83,7 @@ export default class Machinery extends React.Component<Props> {
         }
 
         const showResetButton = !machinery.entity && machinery.sourceString;
+
         const hasMore = machinery.hasMore;
 
         return (
@@ -113,56 +114,38 @@ export default class Machinery extends React.Component<Props> {
                         </Localized>
                     </form>
                 </div>
-<<<<<<< HEAD
-                <ul>
-                    {machinery.translations.map((translation, index) => {
-                        return (
-                            <Translation
-                                index={index}
-                                sourceString={machinery.sourceString}
-                                translation={translation}
-                                key={index}
+                <div className='list-wrapper'>
+                    <InfiniteScroll
+                        pageStart={1}
+                        loadMore={this.getMoreResults}
+                        hasMore={hasMore}
+                        loader={
+                            <SkeletonLoader
+                                key={0}
+                                items={machinery.translations}
                             />
-                        );
-                    })}
-                </ul>
-=======
-                <InfiniteScroll
-                    pageStart={1}
-                    loadMore={this.getMoreResults}
-                    hasMore={hasMore}
-                    loader={
-                        <SkeletonLoader
-                            key={0}
-                            items={machinery.translations}
-                        />
-                    }
-                    useWindow={false}
-                    threshold={600}
-                >
-                    <ul>
-                        {machinery.translations.map((translation, index) => {
-                            return (
-                                <Translation
-                                    sourceString={machinery.sourceString}
-                                    translation={translation}
-                                    entity={machinery.entity}
-                                    addTextToEditorTranslation={
-                                        addTextToEditorTranslation
-                                    }
-                                    updateEditorTranslation={
-                                        updateEditorTranslation
-                                    }
-                                    updateMachinerySources={
-                                        updateMachinerySources
-                                    }
-                                    key={index}
-                                />
-                            );
-                        })}
-                    </ul>
-                </InfiniteScroll>
->>>>>>> Initial work to add infinite scroll to machinery search
+                        }
+                        useWindow={false}
+                        threshold={600}
+                    >
+                        <ul>
+                            {machinery.translations.map(
+                                (translation, index) => {
+                                    return (
+                                        <Translation
+                                            index={index}
+                                            sourceString={
+                                                machinery.sourceString
+                                            }
+                                            translation={translation}
+                                            key={index}
+                                        />
+                                    );
+                                },
+                            )}
+                        </ul>
+                    </InfiniteScroll>
+                </div>
             </section>
         );
     }
