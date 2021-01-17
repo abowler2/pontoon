@@ -5,13 +5,14 @@ import React from 'react';
 import type { MachineryTranslation } from 'core/api';
 import type { Locale } from 'core/locale';
 
-import GoogleTranslation from './GoogleTranslation';
-import MicrosoftTranslation from './MicrosoftTranslation';
-import SystranTranslation from './SystranTranslation';
-import MicrosoftTerminology from './MicrosoftTerminology';
-import TransvisionMemory from './TransvisionMemory';
-import CaighdeanTranslation from './CaighdeanTranslation';
-import TranslationMemory from './TranslationMemory';
+import ConcordanceSearch from './source/ConcordanceSearch';
+import GoogleTranslation from './source/GoogleTranslation';
+import MicrosoftTranslation from './source/MicrosoftTranslation';
+import SystranTranslation from './source/SystranTranslation';
+import MicrosoftTerminology from './source/MicrosoftTerminology';
+import TransvisionMemory from './source/TransvisionMemory';
+import CaighdeanTranslation from './source/CaighdeanTranslation';
+import TranslationMemory from './source/TranslationMemory';
 
 type Props = {|
     translation: MachineryTranslation,
@@ -26,7 +27,7 @@ export default function TranslationSource({ translation, locale }: Props) {
         switch (source) {
             case 'concordance-search':
                 return (
-                    <TranslationMemory
+                    <ConcordanceSearch
                         projectName={translation.projectName}
                         key={index}
                     />

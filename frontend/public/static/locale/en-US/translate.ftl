@@ -433,6 +433,12 @@ machinery-Machinery--search-placeholder =
 machinery-CaighdeanTranslation--visit-caighdean = CAIGHDEAN
     .title = Visit Caighdean Machine Translation
 
+## Machinery Concordance Search
+## Shows concordance search results from Pontoon's memory.
+machinery-ConcordanceSearch--pontoon-homepage =
+    .title = Pontoon Homepage
+machinery-ConcordanceSearch--translation-memory = TRANSLATION MEMORY
+
 
 ## Machinery Google Translation
 ## Shows the translation source from Google Translate.
