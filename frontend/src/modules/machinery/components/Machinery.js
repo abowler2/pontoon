@@ -15,7 +15,7 @@ import type { MachineryState } from '..';
 type Props = {|
     locale: ?Locale,
     machinery: MachineryState,
-    searchMachinery: (string) => void,
+    searchMachinery: (string, ?number) => void,
 |};
 
 /**
@@ -61,7 +61,7 @@ export default class Machinery extends React.Component<Props> {
         this.props.searchMachinery(this.searchInput.current.value);
     };
 
-    getMoreResults = () => {
+    getMoreResults = (page: number) => {
         const { machinery } = this.props;
 
         // Temporary fix for the infinite number of requests from InfiniteScroller
@@ -72,7 +72,7 @@ export default class Machinery extends React.Component<Props> {
             return;
         }
 
-        this.props.searchMachinery(this.searchInput.current.value);
+        this.props.searchMachinery(this.searchInput.current.value, page);
     };
 
     render() {
@@ -126,7 +126,7 @@ export default class Machinery extends React.Component<Props> {
                             />
                         }
                         useWindow={false}
-                        threshold={600}
+                        threshold={300}
                     >
                         <ul>
                             {machinery.translations.map(

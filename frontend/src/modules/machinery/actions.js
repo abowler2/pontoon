@@ -68,9 +68,17 @@ export function reset(entity: ?number, sourceString: string): ResetAction {
  *  - Transvision (if enabled for the locale)
  *  - Caighdean (if enabled for the locale)
  */
-export function get(source: string, locale: Locale, pk: ?number): Function {
+export function get(
+    source: string,
+    locale: Locale,
+    pk: ?number,
+    page?: number,
+): Function {
     return async (dispatch) => {
-        dispatch(reset(pk, source));
+        if (!page) {
+            dispatch(reset(pk, source));
+        }
+
         dispatch(request());
 
         // Abort all previously running requests.
@@ -78,7 +86,7 @@ export function get(source: string, locale: Locale, pk: ?number): Function {
 
         if (!pk) {
             api.machinery
-                .getConcordanceResults(source, locale)
+                .getConcordanceResults(source, locale, page)
                 .then((results) =>
                     dispatch(addTranslations(results.results, results.hasMore)),
                 );

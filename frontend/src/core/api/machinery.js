@@ -31,11 +31,13 @@ export default class MachineryAPI extends APIBase {
     async getConcordanceResults(
         source: string,
         locale: Locale,
+        page?: number,
     ): Promise<ConcordanceTranslations> {
         const url = '/concordance-search/';
         const params = {
             text: source,
             locale: locale.code,
+            page: page ? page.toString() : 1,
         };
 
         const results = await this._get(url, params);

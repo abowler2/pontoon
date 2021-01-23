@@ -206,7 +206,7 @@ export class EntityDetailsBase extends React.Component<InternalProps, State> {
         }
     }
 
-    searchMachinery = (query: string) => {
+    searchMachinery = (query: string, page?: number) => {
         const { dispatch, locale, selectedEntity } = this.props;
 
         let source = query;
@@ -221,7 +221,7 @@ export class EntityDetailsBase extends React.Component<InternalProps, State> {
             pk = selectedEntity.pk;
         }
 
-        dispatch(machinery.actions.get(source, locale, pk));
+        dispatch(machinery.actions.get(source, locale, pk, page));
     };
 
     copyLinkToClipboard = () => {
