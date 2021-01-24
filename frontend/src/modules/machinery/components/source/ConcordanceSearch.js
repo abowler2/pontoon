@@ -4,7 +4,7 @@ import React from 'react';
 import { Localized } from '@fluent/react';
 
 type Props = {|
-    projectName?: string,
+    projectName?: ?string,
 |};
 
 /**
