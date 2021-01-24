@@ -41,11 +41,13 @@ function dedupedTranslations(
         const sameTranslation = translations.findIndex(
             (oldT) =>
                 newT.original === oldT.original &&
-                newT.translation === oldT.translation &&
-                newT.projectName === oldT.projectName,
+                newT.translation === oldT.translation,
         );
 
-        if (sameTranslation >= 0) {
+        if (
+            sameTranslation >= 0 &&
+            newT.sources[0] !== translations[sameTranslation].sources[0]
+        ) {
             translations[sameTranslation].sources.push(newT.sources[0]);
 
             if (newT.quality && !translations[sameTranslation].quality) {
