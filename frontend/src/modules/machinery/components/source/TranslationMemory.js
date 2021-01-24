@@ -5,7 +5,6 @@ import { Localized } from '@fluent/react';
 
 type Props = {|
     itemCount?: number,
-    projectName?: string,
 |};
 
 /**
