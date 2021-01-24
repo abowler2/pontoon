@@ -8,9 +8,9 @@ type Props = {|
 |};
 
 /**
- * Show the translation source from Pontoon's memory.
+ * Show the concordance search results from Pontoon's memory.
  */
-export default function TranslationMemory(props: Props) {
+export default function ConcordanceSearch(props: Props) {
     return (
         <li>
             <Localized

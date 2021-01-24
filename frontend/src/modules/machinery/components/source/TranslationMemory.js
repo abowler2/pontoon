@@ -26,13 +26,9 @@ export default function TranslationMemory(props: Props) {
                     rel='noopener noreferrer'
                     onClick={(e: SyntheticMouseEvent<>) => e.stopPropagation()}
                 >
-                    {!props.projectName ? (
-                        <Localized id='machinery-TranslationMemory--translation-memory'>
-                            <span>TRANSLATION MEMORY</span>
-                        </Localized>
-                    ) : (
-                        <span>{props.projectName.toUpperCase()}</span>
-                    )}
+                    <Localized id='machinery-TranslationMemory--translation-memory'>
+                        <span>TRANSLATION MEMORY</span>
+                    </Localized>
                     {!props.itemCount ? null : (
                         <Localized
                             id='machinery-TranslationMemory--number-occurrences'
