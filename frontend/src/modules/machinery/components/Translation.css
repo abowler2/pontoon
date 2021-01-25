@@ -26,8 +26,7 @@
     display: inline-block;
 }
 
-.machinery .translation > header ul li,
-.machinery .translation > header ul li span {
+.machinery .translation > header ul li {
     display: inline-block;
     padding-left: 3px;
 }
@@ -36,8 +35,7 @@
     pointer-events: auto;
 }
 
-.machinery .translation > header ul li:not(:first-child)::before,
-.machinery .translation > header ul li span:not(:first-child)::before {
+.machinery .translation > header ul li:not(:first-child)::before {
     content: '•';
     padding-right: 3px;
 }

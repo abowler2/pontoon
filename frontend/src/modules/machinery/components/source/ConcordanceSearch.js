@@ -4,7 +4,7 @@ import React from 'react';
 import { Localized } from '@fluent/react';
 
 type Props = {|
-    projectName?: Array<?string>,
+    projectName?: ?string,
 |};
 
 /**
@@ -30,24 +30,7 @@ export default function ConcordanceSearch(props: Props) {
                             <span>TRANSLATION MEMORY</span>
                         </Localized>
                     ) : (
-                        props.projectName.map((project, index) => {
-                            if (!project || project === null) {
-                                return (
-                                    <Localized
-                                        id='machinery-ConcordanceSearch--translation-memory'
-                                        key={index}
-                                    >
-                                        <span>TRANSLATION MEMORY</span>
-                                    </Localized>
-                                );
-                            } else {
-                                return (
-                                    <span key={index}>
-                                        {project.toUpperCase()}
-                                    </span>
-                                );
-                            }
-                        })
+                        <span>{props.projectName.toUpperCase()}</span>
                     )}
                 </a>
             </Localized>
