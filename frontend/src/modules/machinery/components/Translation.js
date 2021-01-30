@@ -80,7 +80,7 @@ export default function Translation(props: Props) {
                 onClick={copyTranslationIntoEditor}
                 ref={translationRef}
             >
-                {translation.sources[0] === 'concordance-search' ? (
+                {translation.sources.includes('concordance-search') ? (
                     <ConcordanceSearch
                         sourceString={sourceString}
                         translation={translation}

@@ -26,14 +26,14 @@ export default function TranslationSource({ translation, locale }: Props) {
     const translationSource = translation.sources.map((source, index) => {
         switch (source) {
             case 'concordance-search':
-                return !translation.projectName ? (
+                return !translation.projectNames ? (
                     <ConcordanceSearch key={index} />
                 ) : (
-                    translation.projectName.map((project) => {
+                    translation.projectNames.map((project) => {
                         return (
                             <ConcordanceSearch
                                 projectName={project}
-                                key={index}
+                                key={project}
                             />
                         );
                     })

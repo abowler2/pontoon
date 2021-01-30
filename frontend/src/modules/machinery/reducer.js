@@ -45,22 +45,17 @@ function dedupedTranslations(
         );
 
         if (sameTranslation >= 0) {
-            if (
-                translations[sameTranslation].projectName &&
-                newT.projectName &&
-                newT.projectName !== translations[sameTranslation].projectName
-            ) {
-                translations[sameTranslation].projectName.push(
-                    newT.projectName[0],
-                );
+            translations[sameTranslation].sources.push(newT.sources[0]);
+
+            if (newT.quality && !translations[sameTranslation].quality) {
+                translations[sameTranslation].quality = newT.quality;
             }
 
-            if (newT.sources[0] !== translations[sameTranslation].sources[0]) {
-                translations[sameTranslation].sources.push(newT.sources[0]);
-
-                if (newT.quality && !translations[sameTranslation].quality) {
-                    translations[sameTranslation].quality = newT.quality;
-                }
+            if (
+                newT.projectNames &&
+                !translations[sameTranslation].projectNames
+            ) {
+                translations[sameTranslation].projectNames = newT.projectNames;
             }
         } else {
             translations.push({ ...newT });

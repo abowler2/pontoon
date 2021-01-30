@@ -52,7 +52,7 @@ export default class MachineryAPI extends APIBase {
                     sources: ['concordance-search'],
                     original: item.source,
                     translation: item.target,
-                    projectName: [item.project_name],
+                    projectNames: item.project_names,
                 };
             },
         );
