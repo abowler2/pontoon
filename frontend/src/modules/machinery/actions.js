@@ -85,7 +85,7 @@ export function get(
         await api.machinery.abort();
 
         if (!pk) {
-            api.machinery
+            await api.machinery
                 .getConcordanceResults(source, locale, page)
                 .then((results) =>
                     dispatch(addTranslations(results.results, results.hasMore)),
@@ -96,36 +96,38 @@ export function get(
                 .then((results) => dispatch(addTranslations(results)));
         }
 
-        api.machinery
-            .getGoogleTranslation(source, locale)
-            .then((results) => dispatch(addTranslations(results)));
-
-        api.machinery
-            .getMicrosoftTranslation(source, locale)
-            .then((results) => dispatch(addTranslations(results)));
-
-        if (locale.systranTranslateCode) {
+        if (!page) {
             api.machinery
-                .getSystranTranslation(source, locale)
+                .getGoogleTranslation(source, locale)
                 .then((results) => dispatch(addTranslations(results)));
-        }
 
-        if (locale.msTerminologyCode) {
             api.machinery
-                .getMicrosoftTerminology(source, locale)
+                .getMicrosoftTranslation(source, locale)
                 .then((results) => dispatch(addTranslations(results)));
-        }
 
-        if (locale.transvision) {
-            api.machinery
-                .getTransvisionMemory(source, locale)
-                .then((results) => dispatch(addTranslations(results)));
-        }
+            if (locale.systranTranslateCode) {
+                api.machinery
+                    .getSystranTranslation(source, locale)
+                    .then((results) => dispatch(addTranslations(results)));
+            }
 
-        if (locale.code === 'ga-IE' && pk) {
-            api.machinery
-                .getCaighdeanTranslation(source, locale, pk)
-                .then((results) => dispatch(addTranslations(results)));
+            if (locale.msTerminologyCode) {
+                api.machinery
+                    .getMicrosoftTerminology(source, locale)
+                    .then((results) => dispatch(addTranslations(results)));
+            }
+
+            if (locale.transvision) {
+                api.machinery
+                    .getTransvisionMemory(source, locale)
+                    .then((results) => dispatch(addTranslations(results)));
+            }
+
+            if (locale.code === 'ga-IE' && pk) {
+                api.machinery
+                    .getCaighdeanTranslation(source, locale, pk)
+                    .then((results) => dispatch(addTranslations(results)));
+            }
         }
     };
 }
