@@ -84,6 +84,47 @@ export function get(
         // Abort all previously running requests.
         await api.machinery.abort();
 
+        const machineTranslationRequests = [
+            api.machinery
+                .getGoogleTranslation(source, locale)
+                .then((results) => dispatch(addTranslations(results))),
+
+            api.machinery
+                .getMicrosoftTranslation(source, locale)
+                .then((results) => dispatch(addTranslations(results))),
+        ];
+
+        if (locale.systranTranslateCode) {
+            machineTranslationRequests.push(
+                api.machinery
+                    .getSystranTranslation(source, locale)
+                    .then((results) => dispatch(addTranslations(results))),
+            );
+        }
+        if (locale.msTerminologyCode) {
+            machineTranslationRequests.push(
+                api.machinery
+                    .getMicrosoftTerminology(source, locale)
+                    .then((results) => dispatch(addTranslations(results))),
+            );
+        }
+
+        if (locale.transvision) {
+            machineTranslationRequests.push(
+                api.machinery
+                    .getTransvisionMemory(source, locale)
+                    .then((results) => dispatch(addTranslations(results))),
+            );
+        }
+
+        if (locale.code === 'ga-IE' && pk) {
+            machineTranslationRequests.push(
+                api.machinery
+                    .getCaighdeanTranslation(source, locale, pk)
+                    .then((results) => dispatch(addTranslations(results))),
+            );
+        }
+
         if (!pk) {
             await api.machinery
                 .getConcordanceResults(source, locale, page)
@@ -91,43 +132,14 @@ export function get(
                     dispatch(addTranslations(results.results, results.hasMore)),
                 );
         } else {
-            api.machinery
+            await api.machinery
                 .getTranslationMemory(source, locale, pk)
                 .then((results) => dispatch(addTranslations(results)));
         }
 
         if (!page) {
-            api.machinery
-                .getGoogleTranslation(source, locale)
-                .then((results) => dispatch(addTranslations(results)));
-
-            api.machinery
-                .getMicrosoftTranslation(source, locale)
-                .then((results) => dispatch(addTranslations(results)));
-
-            if (locale.systranTranslateCode) {
-                api.machinery
-                    .getSystranTranslation(source, locale)
-                    .then((results) => dispatch(addTranslations(results)));
-            }
-
-            if (locale.msTerminologyCode) {
-                api.machinery
-                    .getMicrosoftTerminology(source, locale)
-                    .then((results) => dispatch(addTranslations(results)));
-            }
-
-            if (locale.transvision) {
-                api.machinery
-                    .getTransvisionMemory(source, locale)
-                    .then((results) => dispatch(addTranslations(results)));
-            }
-
-            if (locale.code === 'ga-IE' && pk) {
-                api.machinery
-                    .getCaighdeanTranslation(source, locale, pk)
-                    .then((results) => dispatch(addTranslations(results)));
-            }
+            // $FLOW_IGNORE: this is a newer method and type def is missing in
+            await Promise.allSettled(machineTranslationRequests);
         }
     };
 }
