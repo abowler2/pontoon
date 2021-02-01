@@ -45,7 +45,10 @@ function dedupedTranslations(
         );
 
         if (sameTranslation >= 0) {
-            translations[sameTranslation].sources.push(newT.sources[0]);
+            if (
+                !translations[sameTranslation].sources.includes(newT.sources[0])
+            )
+                translations[sameTranslation].sources.push(newT.sources[0]);
 
             if (newT.quality && !translations[sameTranslation].quality) {
                 translations[sameTranslation].quality = newT.quality;
